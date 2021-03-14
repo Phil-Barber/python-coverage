@@ -1,0 +1,5 @@
+name: 'Python Coverage'
+description: 'Upload the coverage report to github as a comment'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
