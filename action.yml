@@ -1,5 +1,13 @@
 name: 'Python Coverage'
 description: 'Upload the coverage report to github as a comment'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "composite"
+  steps:
+    - run: coverage report > .github/workflows/coverage-report.md
+      shell: bash
+    - uses: Phil-Barber/comment-on-pr@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        template: coverage-report.md
+        updatecomment: coverage
